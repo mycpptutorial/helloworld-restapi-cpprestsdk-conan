@@ -1,11 +1,17 @@
-cmake_minimum_required(VERSION 2.8.12)
-project(RestApiCppRestSDKConan)
+cmake_minimum_required(VERSION 3.0)
 
-add_definitions("-std=c++11")
+project(HelloWorldRestApiWithCppRestSDK)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-ADD_LIBRARY(hello hello.cpp)
-ADD_EXECUTABLE(greet main.cpp)
-TARGET_LINK_LIBRARIES(greet hello)
+set(HEADER_SEARCH_PATH "./src/foundation/include")
+
+add_executable(${PROJECT_NAME} ./src/main.cpp
+                               ./src/microsvc_controller.cpp
+                               ./src/foundation/network_utils.cpp
+                               ./src/foundation/basic_controller.cpp)
+
+include_directories(${HEADER_SEARCH_PATH})
+
+target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS})
