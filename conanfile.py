@@ -13,6 +13,7 @@ class CpprestsdkConan(ConanFile):
     options = {"shared": [True, False]}
     default_options = "shared=False"
     generators = "cmake"
+    exports = "*"
 
     def source(self):
         self.run("git clone https://github.com/mycpptutorial/helloworld-restapi-cpprestsdk-conan.git")
@@ -20,16 +21,11 @@ class CpprestsdkConan(ConanFile):
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="cpprestsdk")
+        cmake.configure(source_folder="helloworld-restapi-cpprestsdk-conan")
         cmake.build()
 
-        # Explicit way:
-        # self.run('cmake %s/hello %s'
-        #          % (self.source_folder, cmake.command_line))
-        # self.run("cmake --build . %s" % cmake.build_config)
-
     def package(self):
-        self.copy("*.h", dst="include", src="hello")
+        self.copy("*.hpp", dst="include", src="src/foundation/include")
         self.copy("*.lib", dst="lib", keep_path=False)
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
@@ -37,4 +33,4 @@ class CpprestsdkConan(ConanFile):
         self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ["cpprestsdk"]
+        self.cpp_info.libs = ["helloworld-restapi-cpprestsdk-conan"]
