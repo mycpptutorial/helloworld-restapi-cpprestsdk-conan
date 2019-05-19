@@ -15,13 +15,14 @@ class CpprestsdkConan(ConanFile):
     generators = "cmake"
     exports = "*"
 
-    def source(self):
-        self.run("git clone https://github.com/mycpptutorial/helloworld-restapi-cpprestsdk-conan.git")
-        self.run("cd helloworld-restapi-cpprestsdk-conan")
+    def requirements(self):
+        self.requires("OpenSSL/1.0.2o@conan/stable")
+        self.requires("zlib/1.2.11@conan/stable")
+        self.requires("cpprestsdk/2.10.13@conanrepos/stable")
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="helloworld-restapi-cpprestsdk-conan")
+        cmake.configure(source_folder=".")
         cmake.build()
 
     def package(self):

@@ -3,11 +3,11 @@
 
 
 ```
-mkdir build
-cd build
-conan export .. helloworld-restapi-cpprestsdk-conan/1.0.0@mycpptutorial/stable
+conan remove helloworld-restapi-cpprestsdk-conan/1.0.0@mycpptutorial/stable
 
 conan remote remove helloworld-restapi-cpprestsdk-conan/1.0.0@mycpptutorial/stable
+
+conan export . helloworld-restapi-cpprestsdk-conan/1.0.0@mycpptutorial/stable
 
 conan remote add helloworld-restapi-cpprestsdk-conan/1.0.0@mycpptutorial/stable https://api.bintray.com/conan/mycpptutorial/restapi-cpprestsdk
 

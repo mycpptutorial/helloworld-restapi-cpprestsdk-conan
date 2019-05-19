@@ -1,7 +1,0 @@
-[requires]
-OpenSSL/1.0.2o@conan/stable
-zlib/1.2.11@conan/stable
-cpprestsdk/2.10.13@conanrepos/stable
-
-[generators]
-cmake
