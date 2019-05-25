@@ -18,12 +18,26 @@ class CpprestsdkConan(ConanFile):
     def requirements(self):
         self.requires("OpenSSL/1.0.2o@conan/stable")
         self.requires("zlib/1.2.11@conan/stable")
+        self.requires("boost/1.69.0@conan/stable")
         self.requires("cpprestsdk/2.10.13@conanrepos/stable")
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder=".")
+        cmake.configure(source_folder="src")
         cmake.build()
+
+    def imports(self):
+        self.copy("*.*", "include/openssl", "include/openssl")
+        self.copy("*.*", "include/boost", "include/boost")
+        self.copy("zconf.h", "include/zlib", "include")
+        self.copy("zlib.h", "include/zlib", "include")
+        self.copy("bzlib.h", "include/zlib", "include")
+        self.copy("*.*", "include/pplx", "include/pplx")
+        self.copy("*.*", "include/cpprest", "include/cpprest")
+        self.copy("*.dll", "bin", "lib")
+        self.copy("*.dylib", "bin", "lib")
+        self.copy("*.so", "bin", "lib")
+        self.copy("*.a", "lib", "lib")
 
     def package(self):
         self.copy("*.hpp", dst="include", src="src/foundation/include")
@@ -34,4 +48,4 @@ class CpprestsdkConan(ConanFile):
         self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ["helloworld-restapi-cpprestsdk-conan"]
+        self.cpp_info.libs = ["HelloWorldRestApiWithCppRestSDK"]
